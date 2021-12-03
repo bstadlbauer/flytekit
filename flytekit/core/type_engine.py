@@ -496,6 +496,8 @@ class TypeEngine(typing.Generic[T]):
         Converts a Literal value with an expected python type into a python value.
         """
         transformer = cls.get_transformer(expected_python_type)
+        print(expected_python_type)
+        print("to_python_value", lv)
         return transformer.to_python_value(ctx, lv, expected_python_type)
 
     @classmethod
@@ -520,6 +522,7 @@ class TypeEngine(typing.Generic[T]):
             raise ValueError(
                 f"Received more input values {len(lm.literals)}" f" than allowed by the input spec {len(python_types)}"
             )
+        print("python_types", python_types)
         return {k: TypeEngine.to_python_value(ctx, lm.literals[k], v) for k, v in python_types.items()}
 
     @classmethod
