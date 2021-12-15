@@ -1,4 +1,5 @@
 import datetime as _datetime
+from functools import update_wrapper
 import inspect
 from typing import Any, Callable, Dict, List, Optional, Type, Union
 
@@ -193,7 +194,7 @@ def task(
             secret_requests=secret_requests,
             execution_mode=execution_mode,
         )
-
+        update_wrapper(task_instance, fn)
         return task_instance
 
     if _task_function:
